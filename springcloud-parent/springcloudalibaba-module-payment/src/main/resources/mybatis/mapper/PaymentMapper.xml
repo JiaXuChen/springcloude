@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaxuch.payment.mapper.PaymentMapper">
+    <resultMap id="paymentInfoMapping" type="com.jiaxuch.model.pay.PaymentInfo">
+        <id property="payId" column="id" />
+    </resultMap>
+
+    <select id="getPaymentInfo" resultMap="paymentInfoMapping">
+        select * from payment where id = #{id}
+    </select>
+
+    <insert id="savePaymentInfo">
+        insert into payment(id,userId,orderId,payType,price,payStatus,fcd,lcd)
+        values (#{payId},#{userId},#{orderId},#{payType},#{price},#{payStatus},NOW(),NOW())
+  </insert>
+
+</mapper>

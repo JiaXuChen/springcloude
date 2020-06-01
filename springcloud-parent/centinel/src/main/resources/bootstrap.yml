@@ -1,0 +1,55 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #192.168.40.102:1111
+      config:
+        server-addr: localhost:8848 #192.168.40.102:1111
+        file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+  application:
+    name: springcloudalibaba-module-sentinel
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#spring:
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+#      config:
+#        server-addr: localhost:8848 #192.168.40.102:1111
+#        file-extension: yaml
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8080
+#        port: 8719
+#      datasource:
+#        ds1:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: ${spring.application.name}
+#            groupId: DEFAULT_GROUP
+#            data_type: json
+#            rule_type: flow
+#  application:
+#    name: springcloudalibaba-module-sentinel
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"

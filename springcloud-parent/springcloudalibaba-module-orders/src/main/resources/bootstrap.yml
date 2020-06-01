@@ -1,0 +1,52 @@
+#spring:
+#  zipkin:
+#    base-url: http://localhost:9411
+#  sleuth:
+#    sampler:
+#      probability: 1
+#  cloud:
+#    stream:
+#      kafka:
+#        binder:
+#          brokers: 192.168.40.102:9092
+#          #zk-nodes: 192.168.40.102:2181
+#          auto-create-topics: true
+#    config:
+#      name: orders #坑，我直接用springcloud-moudule-orders这个命名，应该存在下划线，导致启动有问题
+#      profile: dev
+#      uri: http://localhost:10001
+#      label: master
+#  application:
+#    name: springcloudalibaba-moudule-orders
+##暴露端点监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #192.168.40.102:1111
+      config:
+        server-addr: localhost:8848 #192.168.40.102:1111
+        file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+  application:
+    name: springcloudalibaba-module-orders
+
+feign:
+  sentinel:
+    enabled: true

@@ -1,0 +1,44 @@
+server:
+  port: 10001
+
+spring:
+  application:
+    name: springcloud-module-config
+  cloud:
+    zookeeper:
+      connect-string: 192.168.40.102:2181
+    config:
+      server:
+        git:
+          uri: https://github.com/JiaXuChen/springcloud-config.git
+          search-paths:
+            - springcloud-module-orders
+            - springcloud-module-payment
+            - springcloud-modus-gatway
+            - springcloud-moudule-eureka-server
+            - springcloud-config
+      label: master
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.40.102:9092
+          zk-nodes: 192.168.40.102:2181
+          auto-create-topics: true
+          configuration:
+            security:
+              protocol: PLAINTEXT
+
+    bus:
+      enabled: true
+
+#暴露端点监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
+
+
+
+

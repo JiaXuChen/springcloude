@@ -1,0 +1,29 @@
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.40.102:9092
+          #zk-nodes: 192.168.40.102:2181
+          auto-create-topics: true
+    config:
+      name: orders #坑，我直接用springcloud-moudule-orders这个命名，应该存在下划线，导致启动有问题
+      profile: dev
+      uri: http://localhost:10001
+      label: master
+  application:
+    name: springcloud-module-orders
+#暴露端点监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+

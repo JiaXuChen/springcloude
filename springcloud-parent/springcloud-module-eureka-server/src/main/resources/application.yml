@@ -1,0 +1,39 @@
+server:
+  port: 7000
+#spring:
+#  profiles:
+#    active: uat
+eureka:
+  instance:
+    hostname: springcloud-moudule-eureka-server-7000
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://springcloud-moudule-eureka-server-7001:7001/eureka,http://springcloud-moudule-eureka-server-7002:7002/eureka
+---
+server:
+  port: 7001
+spring:
+  profiles: uat
+eureka:
+  instance:
+    hostname: springcloud-moudule-eureka-server-7001
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://springcloud-moudule-eureka-server-7000:7000/eureka,http://springcloud-moudule-eureka-server-7002:7002/eureka
+---
+server:
+  port: 7002
+eureka:
+  instance:
+    hostname: springcloud-moudule-eureka-server-7002
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://springcloud-moudule-eureka-server-7000:7000/eureka,http://springcloud-moudule-eureka-server-7001:7001/eureka
+spring:
+  profiles: prod

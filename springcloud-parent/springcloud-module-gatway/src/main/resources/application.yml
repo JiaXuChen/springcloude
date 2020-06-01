@@ -1,0 +1,30 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: springcloud-moudule-gateway
+  cloud:
+    zookeeper:
+      connect-string: 192.168.40.102:2181
+    gateway:
+      routes:
+        - id: springcloud-moudule-orders
+          uri: lb://springcloud-moudule-orders
+          predicates:
+            - Path=/orders/query/*
+    discovery:
+      enabled: true
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://springcloud-moudule-eureka-server-7001:7001/eureka,http://springcloud-moudule-eureka-server-7002:7002/eureka,http://springcloud-moudule-eureka-server-7000:7000/eureka
+#  instance:
+#    instance-id: ${spring.application.name}-${server.port}
+#    prefer-ip-address: true
